@@ -1,0 +1,73 @@
+﻿@model Lab09.Models.vdlSanPham
+
+@{
+    ViewData["Title"] = "Xác nhận xóa Sản phẩm";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                <h3 class="mb-0">Xóa Sản phẩm: @Model.vdlTenSanPham</h3>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title text-danger">Bạn có chắc chắn muốn xóa sản phẩm này không?</h4>
+                <p class="card-text">Hành động này không thể được hoàn tác. Vui lòng xem lại thông tin dưới đây trước khi xác nhận.</p>
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        @if (!string.IsNullOrEmpty(Model.vdlHinhAnh))
+                        {
+                            <img src="~/images/@Model.vdlHinhAnh" class="img-fluid rounded shadow-sm" alt="@Model.vdlTenSanPham" />
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        <dl class="row">
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.vdlMaSanPham)
+                            </dt>
+                            <dd class="col-sm-7">
+                                @Html.DisplayFor(model => model.vdlMaSanPham)
+                            </dd>
+
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.vdlTenSanPham)
+                            </dt>
+                            <dd class="col-sm-7">
+                                @Html.DisplayFor(model => model.vdlTenSanPham)
+                            </dd>
+
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.LoaiSanPham)
+                            </dt>
+                            <dd class="col-sm-7">
+                                @Html.DisplayFor(model => model.LoaiSanPham.vdlTenLoai)
+                            </dd>
+
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.vdlDonGia)
+                            </dt>
+                            <dd class="col-sm-7">
+                                <strong class="text-danger">@Model.vdlDonGia.ToString("N0") đ</strong>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <form asp-action="vdlDelete">
+                    <input type="hidden" asp-for="vdlId" />
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="vdlIndex" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Hủy
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Xác nhận Xóa
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

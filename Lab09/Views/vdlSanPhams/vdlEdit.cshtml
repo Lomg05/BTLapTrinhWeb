@@ -1,0 +1,93 @@
+﻿@model Lab09.Models.vdlSanPham
+
+@{
+    ViewData["Title"] = "Chỉnh sửa Sản phẩm";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-9">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Chỉnh sửa: @Model.vdlTenSanPham</h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="vdlEdit" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="vdlId" />
+                    <input type="hidden" asp-for="vdlHinhAnh" /> @* Giữ lại tên ảnh cũ nếu không chọn ảnh mới *@
+
+                    <div class="row">
+                        @* Cột bên trái cho hình ảnh *@
+                        <div class="col-md-4 text-center">
+                            <label class="form-label">Hình ảnh hiện tại</label>
+                            <img id="imagePreview" src="~/images/@Model.vdlHinhAnh" class="img-fluid rounded shadow-sm mb-2" alt="Hình ảnh sản phẩm" style="max-height: 250px;" />
+                            <div class="mb-3">
+                                <label for="imageFile" class="form-label">Chọn ảnh mới (nếu muốn thay đổi)</label>
+                                <input type="file" name="imageFile" id="imageFile" class="form-control form-control-sm" />
+                            </div>
+                        </div>
+
+                        @* Cột bên phải cho thông tin *@
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="vdlMaSanPham" class="form-label"></label>
+                                    <input asp-for="vdlMaSanPham" class="form-control" />
+                                    <span asp-validation-for="vdlMaSanPham" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="vdlTenSanPham" class="form-label"></label>
+                                    <input asp-for="vdlTenSanPham" class="form-control" />
+                                    <span asp-validation-for="vdlTenSanPham" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="vdlLoaiId" class="form-label"></label>
+                                <select asp-for="vdlLoaiId" class="form-select" asp-items="ViewBag.vdlLoaiId"></select>
+                                <span asp-validation-for="vdlLoaiId" class="text-danger"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="vdlSoLuong" class="form-label"></label>
+                                    <input asp-for="vdlSoLuong" class="form-control" />
+                                    <span asp-validation-for="vdlSoLuong" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="vdlDonGia" class="form-label"></label>
+                                    <input asp-for="vdlDonGia" class="form-control" />
+                                    <span asp-validation-for="vdlDonGia" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="vdlIndex" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Hủy
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Lưu thay đổi
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Script để xem trước ảnh được chọn
+        document.getElementById('imageFile').addEventListener('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                document.getElementById('imagePreview').src = URL.createObjectURL(file);
+            }
+        });
+    </script>
+}

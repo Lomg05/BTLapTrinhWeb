@@ -1,0 +1,79 @@
+﻿@model Lab09.Models.vdlSanPham
+
+@{
+    ViewData["Title"] = "Chi tiết Sản phẩm";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h3 class="mb-0">@ViewData["Title"]: @Model.vdlTenSanPham</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        @if (!string.IsNullOrEmpty(Model.vdlHinhAnh))
+                        {
+                            <img src="~/images/@Model.vdlHinhAnh" class="img-fluid rounded shadow-sm" alt="@Model.vdlTenSanPham" />
+                        }
+                        else
+                        {
+                            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px; border-radius: 0.25rem;">
+                                <span>Không có hình ảnh</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        <dl class="row">
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.vdlMaSanPham)
+                            </dt>
+                            <dd class="col-sm-7">
+                                @Html.DisplayFor(model => model.vdlMaSanPham)
+                            </dd>
+
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.vdlTenSanPham)
+                            </dt>
+                            <dd class="col-sm-7">
+                                @Html.DisplayFor(model => model.vdlTenSanPham)
+                            </dd>
+
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.LoaiSanPham)
+                            </dt>
+                            <dd class="col-sm-7">
+                                @Html.DisplayFor(model => model.LoaiSanPham.vdlTenLoai)
+                            </dd>
+
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.vdlSoLuong)
+                            </dt>
+                            <dd class="col-sm-7">
+                                @Html.DisplayFor(model => model.vdlSoLuong)
+                            </dd>
+
+                            <dt class="col-sm-5">
+                                @Html.DisplayNameFor(model => model.vdlDonGia)
+                            </dt>
+                            <dd class="col-sm-7">
+                                <strong class="text-danger">@Model.vdlDonGia.ToString("N0") đ</strong>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <div class="d-flex justify-content-between">
+                    <a asp-action="vdlIndex" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                    </a>
+                    <a asp-action="vdlEdit" asp-route-id="@Model?.vdlId" class="btn btn-primary">
+                        <i class="fas fa-pencil-alt"></i> Chỉnh sửa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

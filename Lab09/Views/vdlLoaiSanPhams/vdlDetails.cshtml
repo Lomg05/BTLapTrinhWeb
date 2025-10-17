@@ -1,0 +1,49 @@
+﻿@model Lab09.Models.vdlLoaiSanPham
+
+@{
+    ViewData["Title"] = "Chi tiết Loại sản phẩm";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h3 class="mb-0">Chi tiết Loại sản phẩm</h3>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.vdlMaLoai)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.vdlMaLoai)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.vdlTenLoai)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.vdlTenLoai)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.vdlTrangThai)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @(Model.vdlTrangThai ? "Hoạt động" : "Không hoạt động")
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-light">
+                <div class="d-flex justify-content-between">
+                    <a asp-action="vdlIndex" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                    </a>
+                    <a asp-action="vdlEdit" asp-route-id="@Model?.vdlId" class="btn btn-primary">
+                        <i class="fas fa-pencil-alt"></i> Chỉnh sửa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
